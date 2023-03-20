@@ -1,13 +1,13 @@
 const express = require("express");
-const ctrl = require("../../controllers/contacts");
-const validation = require("../../middlewares/validation");
-const { ctrlWrapper } = require("../../middlewares/ctrlWrapper");
-const { addSchema, updateSchema, updateFavoriteSchema } = require("../../models/contact");
+const { contacts: ctrl } = require("../../controllers");
+const { validation, ctrlWrapper, verify } = require("../../middlewares");
+const { addSchema, updateSchema, updateFavoriteSchema } = require("../../models");
+
 const router = express.Router();
 
-router.get("/", ctrlWrapper(ctrl.listContacts));
+router.get("/", verify, ctrlWrapper(ctrl.listContacts));
 router.get("/:id", ctrlWrapper(ctrl.getById));
-router.post("/", validation(addSchema), ctrlWrapper(ctrl.addContact));
+router.post("/", verify, validation(addSchema), ctrlWrapper(ctrl.addContact));
 router.delete("/:id", ctrlWrapper(ctrl.removeContact));
 router.put("/:id", validation(updateSchema), ctrlWrapper(ctrl.updateContact));
 router.patch(
