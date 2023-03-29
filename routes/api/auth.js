@@ -10,5 +10,7 @@ router.post("/login", validation(loginSchema), ctrlWrapper(ctrl.login));
 router.get("/logout", verify, ctrlWrapper(ctrl.logout));
 router.get("/current", verify, ctrlWrapper(ctrl.getCurrent));
 router.patch("/avatars", verify, upload.single("avatar"), ctrlWrapper(ctrl.updateAvatar));
+router.get("/verify/:verificationToken", ctrlWrapper(ctrl.verifyEmail));
+router.post("/verify", ctrlWrapper(ctrl.resendEmail));
 
 module.exports = router;
