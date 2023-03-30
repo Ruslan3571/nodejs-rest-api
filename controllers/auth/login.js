@@ -3,9 +3,7 @@ const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 require("dotenv").config();
 const { User } = require("../../models");
-
 const { SECRET_KEY } = process.env;
-
 
 const login = async (req, res) => {
   const { email, password } = req.body;
